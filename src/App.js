@@ -1,12 +1,19 @@
-import React from 'react';
+// src/App.js
+
+import React, { useState } from 'react';
 import { Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import IssueDetails from './IssueDetails';
 
 function App() {
   const mockData = [
-    { id: 1, issue: "Issue 1", description: "Description for issue 1" },
-    { id: 2, issue: "Issue 2", description: "Description for issue 2" },
-    // ... add more mock data as needed
+    // ... (your existing mock data)
   ];
+
+  const [selectedIssue, setSelectedIssue] = useState(null);
+
+  if (selectedIssue) {
+    return <IssueDetails issue={selectedIssue} />;
+  }
 
   return (
     <Container style={{ marginTop: '40px' }}>
@@ -24,7 +31,7 @@ function App() {
           </TableHead>
           <TableBody>
             {mockData.map((row) => (
-              <TableRow key={row.id}>
+              <TableRow key={row.id} onClick={() => setSelectedIssue(row)}>
                 <TableCell>{row.id}</TableCell>
                 <TableCell>{row.issue}</TableCell>
                 <TableCell>{row.description}</TableCell>
